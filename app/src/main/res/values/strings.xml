@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">Huimin_Zhou_FitRunner</string>
-    <string name="tracking_service_name">com.example.huimin_zhou.Huimin_Zhou_FitRunner.Sensors.TrackingService</string>
-    <string name="sensor_service_name">com.example.huimin_zhou.Huimin_Zhou_FitRunner.Sensors.SensorService</string>
+    <string name="app_name">FitRunner</string>
+    <string name="tracking_service_name">com.example.huimin_zhou.fitrunner.Service.TrackingService</string>
+    <string name="sensor_service_name">com.example.huimin_zhou.fitrunner.Service.SensorService</string>
 
     <!--Welcome-->
     <string name="text_input">Input Type</string>

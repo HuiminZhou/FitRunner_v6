@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.huimin_zhou.Huimin_Zhou_FitRunner">
+    package="com.example.huimin_zhou.fitrunner">
 
     <uses-feature android:name="android.hardware.camera" />
 
@@ -10,6 +10,16 @@
 
     <uses-feature android:name="android.hardware.location.gps" />
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+    <permission
+        android:name="com.example.gcm.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.example.gcm.permission.C2D_MESSAGE" />
 
     <application
         android:allowBackup="true"
@@ -30,43 +40,51 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name="com.example.huimin_zhou.Huimin_Zhou_FitRunner.MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name="com.example.huimin_zhou.Huimin_Zhou_FitRunner.ProfileActivity"
+        <activity
+            android:name=".ProfileActivity"
             android:label="FitRunner Profile">
             <intent-filter>
                 <action android:name="Profile_Action" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
-        <activity android:name="com.example.huimin_zhou.Huimin_Zhou_FitRunner.ManualActivity"/>
-
+        <activity android:name=".ManualActivity" />
         <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
-
         <activity
             android:name=".MapActivity"
-            android:launchMode="singleTop"/>
-
+            android:launchMode="singleTop" />
         <activity android:name=".HistoryEntryActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.example.huimin_zhou.Huimin_Zhou_FitRunner.fileprovider"
+            android:authorities="com.example.huimin_zhou.fitrunner.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"></meta-data>
+                android:resource="@xml/file_paths" />
         </provider>
 
-        <service android:name=".Sensors.TrackingService" />
-        <service android:name=".Sensors.SensorService" />
+        <service android:name=".Service.TrackingService" />
+        <service android:name=".Service.SensorService" />
+
+        <receiver
+            android:name=".Service.GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="com.example.huimin_zhou.fitrunner" />
+            </intent-filter>
+        </receiver>
+        <service android:name=".Service.GcmIntentService" />
     </application>
 
 </manifest>
